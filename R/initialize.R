@@ -72,3 +72,8 @@ init_lib <- function() {
 # And dont forget targets stuff
 # And also how to link up with remote github
 # Take the stuff out into separate functions e.g. rprofile making
+
+## The usual usual
+# git remote add origin https://github.com/bmfazio/lunautils.git
+# git branch -M main
+# git push -u origin main
