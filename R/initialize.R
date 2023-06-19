@@ -3,14 +3,13 @@ init_proj <- function() {
       "> create .Rproj file",
       "> create .code-workspace file",
       "> initialize renv",
+      "> add a template .Rprofile",
       "> initialize git repo",
       sep = "\n")
 
   usethis::create_project(".")
   vswrkspc <- paste0(basename(getwd()), ".code-workspace")
-  fs::file_create(
-    vswrkspc
-  )
+  fs::file_create(vswrkspc)
   writeLines(c(
 '{
   "folders": [
@@ -19,9 +18,14 @@ init_proj <- function() {
 		}
 	],
 	"settings": {}
-}'
-  ), vswrkspc)
+}'), vswrkspc)
   renv::init(".")
+  fs::file_create(".Rprofile")
+  writeLines(c(
+'options(defaultPackages = c(
+  getOption("defaultPackages"),
+  # Insert other things you want to load here
+))'), ".Rprofile")
   usethis::use_git()
 }
 
@@ -29,14 +33,13 @@ init_lib <- function() {
   cat("I will do the following:",
       "> create package skeleton",
       "> create .code-workspace file",
+      "> put devtools in .Rprofile",
       "> initialize git repo",
       sep = "\n")
 
   usethis::create_package(".")
   vswrkspc <- paste0(basename(getwd()), ".code-workspace")
-  fs::file_create(
-    vswrkspc
-  )
+  fs::file_create(vswrkspc)
   writeLines(c(
 '{
   "folders": [
@@ -45,8 +48,13 @@ init_lib <- function() {
 		}
 	],
 	"settings": {}
-}'
-  ), vswrkspc)
+}'), vswrkspc)
+  fs::file_create(".Rprofile")
+  writeLines(c(
+'options(defaultPackages = c(
+  getOption("defaultPackages"),
+  "devtools"
+))'), ".Rprofile")
   usethis::use_git()
 
   cat("Remember the workflow:",
@@ -62,3 +70,5 @@ init_lib <- function() {
 # Something to find where the global R site file is and add default mirror
 # Also maybe eventually extend renv to pkg dev
 # And dont forget targets stuff
+# And also how to link up with remote github
+# Take the stuff out into separate functions e.g. rprofile making
