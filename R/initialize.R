@@ -17,7 +17,11 @@ init_proj <- function() {
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+    "r.libPaths": [
+      "C:/Users/fazio/config/vscode-R/renv/library/R-4.3/x86_64-w64-mingw32"
+      ]
+  }
 }'), vswrkspc)
   fs::file_create(".Rprofile")
   writeLines(c(
@@ -26,8 +30,10 @@ options(defaultPackages = c(
   getOption("defaultPackages")
   # Insert other things you want to load here
 ))'), ".Rprofile")
-  usethis::use_git()
   renv::init(".")
+  use_git <- usethis::use_git
+  body(use_git) <- body(usethis::use_git)[1:5]
+  use_git()
 }
 
 init_lib <- function() {
@@ -56,7 +62,9 @@ init_lib <- function() {
   getOption("defaultPackages"),
   "devtools"
 ))'), ".Rprofile")
-  usethis::use_git()
+  use_git <- usethis::use_git
+  body(use_git) <- body(usethis::use_git)[1:5]
+  use_git()
 
   cat("Remember the workflow:",
       "- Create scripts with use_r()",
@@ -78,3 +86,7 @@ init_lib <- function() {
 # git remote add origin https://github.com/bmfazio/lunautils.git
 # git branch -M main
 # git push -u origin main
+
+# Remember to set libpath so VSCode wont clash with renv
+# credit to https://github.com/rstudio/renv/issues/1129
+# https://github.com/REditorSupport/vscode-R/wiki/Working-with-renv-enabled-projects
