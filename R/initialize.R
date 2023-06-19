@@ -19,14 +19,15 @@ init_proj <- function() {
 	],
 	"settings": {}
 }'), vswrkspc)
-  renv::init(".")
   fs::file_create(".Rprofile")
   writeLines(c(
-'options(defaultPackages = c(
-  getOption("defaultPackages"),
+'source("renv/activate.R")
+options(defaultPackages = c(
+  getOption("defaultPackages")
   # Insert other things you want to load here
 ))'), ".Rprofile")
   usethis::use_git()
+  renv::init(".")
 }
 
 init_lib <- function() {
