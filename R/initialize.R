@@ -4,7 +4,8 @@ config_hint <- function() {
       '- Add "options(repos = "https://cloud.r-project.org/")" so install.packages stops asking',
       '- To link a minimal renv for VSCode+renv integration add options(LUNAUTILS_RENV_LANGSERVER = <your choice>)',
       "(if you don't know what that is supposed to mean, read https://github.com/rstudio/renv/issues/1129)",
-      "Also, targets::tar_script to make a pipeline and stuff.")
+      "Also, targets::tar_script to make a pipeline and stuff.",
+      sep = "\n")
       # I probably can make a command to create the renv folder with all relevant pkgs as well
 }
 
