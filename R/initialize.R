@@ -62,6 +62,8 @@ init_lib <- function() {
       "> initialize git repo",
       sep = "\n")
 
+  invisible(readline(prompt="Press [Enter] to continue "))
+
   usethis::create_package(".")
   vswrkspc <- paste0(basename(getwd()), ".code-workspace")
   fs::file_create(vswrkspc)
