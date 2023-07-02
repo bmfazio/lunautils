@@ -82,6 +82,9 @@ init_lib <- function() {
   getOption("defaultPackages"),
   "devtools"
 ))'), ".Rprofile")
+
+  cat(paste0(vswrkspc, "\n"), file = ".Rbuildignore", append = TRUE)
+  
   use_git <- usethis::use_git
   body(use_git) <- body(usethis::use_git)[1:5]
   use_git()
