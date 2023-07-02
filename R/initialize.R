@@ -83,6 +83,7 @@ init_lib <- function() {
   "devtools"
 ))'), ".Rprofile")
 
+  usethis::use_agpl_license(version = 3, include_future = TRUE)
   cat(paste0(vswrkspc, "\n"), file = ".Rbuildignore", append = TRUE)
   
   use_git <- usethis::use_git
