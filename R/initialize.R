@@ -10,13 +10,18 @@ config_hint <- function() {
 }
 
 init_proj <- function() {
+  if(is.null(getOption("lunautils.renv.external")))
+    stop("Please set lunautils.renv.external first.\n")
+
   cat("I will do the following:",
       "> create .Rproj file",
       "> create .code-workspace file",
-      "> initialize renv",
       "> add a template .Rprofile",
+      "> initialize renv",
       "> initialize git repo",
       sep = "\n")
+
+  invisible(readline(prompt="Press [Enter] to continue "))
 
   usethis::create_project(".")
   vswrkspc <- paste0(basename(getwd()), ".code-workspace")
@@ -30,7 +35,6 @@ init_proj <- function() {
 	],
 	"settings": {
     "r.libPaths": [
-      "C:/Users/fazio/config/vscode-R/renv/library/R-4.3/x86_64-w64-mingw32"
       ]
   }
 }'), vswrkspc)
@@ -41,10 +45,13 @@ options(defaultPackages = c(
   getOption("defaultPackages")
   # Insert other things you want to load here
 ))'), ".Rprofile")
+  renv::init(".", settings = list(
+    snapshot.type = "explicit",
+    external.libraries = getOption("lunautils.renv.external")
+  ))
   use_git <- usethis::use_git
   body(use_git) <- body(usethis::use_git)[1:5]
   use_git()
-  renv::init(".", settings = list(external.libraries = getOption("LUNAUTILS_RENV_LANGSERVER")))
 }
 
 init_lib <- function() {
@@ -97,7 +104,3 @@ init_lib <- function() {
 # git remote add origin https://github.com/bmfazio/lunautils.git
 # git branch -M main
 # git push -u origin main
-
-# Remember to set libpath so VSCode wont clash with renv
-# credit to https://github.com/rstudio/renv/issues/1129
-# https://github.com/REditorSupport/vscode-R/wiki/Working-with-renv-enabled-projects
