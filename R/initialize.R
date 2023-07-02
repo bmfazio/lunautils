@@ -1,6 +1,6 @@
 config_hint <- function() {
   cat("You probably want to set up an Rprofile.site file!",
-      paste0("It should go in", file.path(Sys.getenv("R_HOME"), "etc")),
+      paste0("It should go in ", file.path(Sys.getenv("R_HOME"), "etc")),
       '- Add "options(repos = "https://cloud.r-project.org/")" so install.packages stops asking',
       '- To link a minimal renv for VSCode+renv integration add options(LUNAUTILS_RENV_LANGSERVER = <your choice>)',
       "(if you don't know what that is supposed to mean, read https://github.com/rstudio/renv/issues/1129)",
@@ -8,7 +8,6 @@ config_hint <- function() {
       sep = "\n")
       # I probably can make a command to create the renv folder with all relevant pkgs as well
 }
-
 
 init_proj <- function() {
   cat("I will do the following:",
