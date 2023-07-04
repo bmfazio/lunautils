@@ -50,6 +50,8 @@ options(defaultPackages = c(
     snapshot.type = "explicit",
     external.libraries = getOption("lunautils.renv.external")
   ))
+  fs:file_create("DESCRIPTION")
+  writeLines("Imports:", "DESCRIPTION")
   use_git <- usethis::use_git
   body(use_git) <- body(usethis::use_git)[1:5]
   use_git()
