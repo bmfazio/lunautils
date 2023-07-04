@@ -45,7 +45,8 @@ options(defaultPackages = c(
   getOption("defaultPackages")
   # Insert other things you want to load here
 ))'), ".Rprofile")
-  renv::init(".", settings = list(
+  renv::init(".", bare = TRUE,
+  settings = list(
     snapshot.type = "explicit",
     external.libraries = getOption("lunautils.renv.external")
   ))
