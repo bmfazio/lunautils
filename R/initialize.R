@@ -2,7 +2,7 @@ config_hint <- function() {
   cat("You probably want to set up an Rprofile.site file!",
       paste0("It should go in ", file.path(Sys.getenv("R_HOME"), "etc")),
       '- Add "options(repos = "https://cloud.r-project.org/")" so install.packages stops asking',
-      '- To link a minimal renv for VSCode+renv integration add options(LUNAUTILS_RENV_LANGSERVER = <your choice>)',
+      '- To link a minimal renv for VSCode+renv integration add options(lunautils.renv_external = <your choice>)',
       "(if you don't know what that is supposed to mean, read https://github.com/rstudio/renv/issues/1129)",
       "Also, targets::tar_script to make a pipeline and stuff.",
       sep = "\n")
@@ -48,7 +48,7 @@ options(defaultPackages = c(
   renv::init(".", bare = TRUE,
   settings = list(
     snapshot.type = "explicit",
-    external.libraries = getOption("lunautils.renv.external")
+    external.libraries = getOption("lunautils.renv_external")
   ))
   fs:file_create("DESCRIPTION")
   writeLines("Imports:", "DESCRIPTION")
