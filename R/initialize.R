@@ -9,9 +9,17 @@ config_hint <- function() {
       # I probably can make a command to create the renv folder with all relevant pkgs as well
 }
 
+safety_check <- function() {
+  if(!identical(
+    list.files(all.files = TRUE, recursive = TRUE, include.dirs = TRUE),
+    character(0)))
+      stop("Folder must be completely empty.")
+}
+
 init_proj <- function() {
   if(is.null(getOption("lunautils.renv_external")))
     stop("Please set the lunautils.renv_external option first.\n")
+  safety_check()
 
   cat("I will do the following:",
       "> create .Rproj file",
@@ -58,6 +66,7 @@ options(defaultPackages = c(
 }
 
 init_lib <- function() {
+  safety_check()
   cat("I will do the following:",
       "> create package skeleton",
       "> create .code-workspace file",
