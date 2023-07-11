@@ -10,8 +10,8 @@ config_hint <- function() {
 }
 
 init_proj <- function() {
-  if(is.null(getOption("lunautils.renv.external")))
-    stop("Please set lunautils.renv.external first.\n")
+  if(is.null(getOption("lunautils.renv_external")))
+    stop("Please set the lunautils.renv_external option first.\n")
 
   cat("I will do the following:",
       "> create .Rproj file",
